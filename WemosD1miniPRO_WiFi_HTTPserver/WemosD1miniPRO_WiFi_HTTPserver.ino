@@ -14,7 +14,7 @@
 //////////////////////////
 ESP8266WebServer server(80);
 unsigned long Time = 0;
-String LEDtilstand = "OFF";
+String ledTilstand = "OFF";
 
 void setup() {
   initHardware();
@@ -82,18 +82,18 @@ String getPage() {
   return page;
 }
 
-void handleSubmit() {  // Update GPIO
+void handleSubmit() {
   String LEDValue;
   LEDValue = server.arg("LED");
   Serial.print("Set GPIO: ");
   Serial.println(LEDValue);
   if (LEDValue == "1") {
     digitalWrite(LED_BUILTIN, LOW);
-    LEDtilstand = "On";
+    ledTilstand = "On";
     server.send(200, "text/html", getPage());
   } else if (LEDValue == "0") {
     digitalWrite(LED_BUILTIN, HIGH);
-    LEDtilstand = "Off";
+    ledTilstand = "Off";
     server.send(200, "text/html", getPage());
   } else {
     Serial.println("Err Led Value");
